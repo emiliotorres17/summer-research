@@ -55,6 +55,7 @@ https://github.com/teslacu/spectralLES.git
 """
 
 import sys
+import time
 from mpi4py import MPI
 import numpy as np
 from math import sqrt, pi
@@ -334,12 +335,10 @@ class spectralLES(object):
             # ----------------------------------------------------------
             # compute all RHS terms
             self.computeAD(**kwargs)
-            print(**kwargs)
-            #print(Sources)
             for computeSource in Sources:
                 computeSource(**kwargs)
                 print(computeSource(**kwargs))
-                sys.exit(0)
+            time.sleep(3)
 
             # ----------------------------------------------------------
             # dealias and project the entire RHS
