@@ -323,6 +323,8 @@ class spectralLES(object):
         b = [0.5, 0.5, 1.0, 0.0]
 
         self.U_hat1[:] = self.U_hat0[:] = self.U_hat[:]
+        print(self.U_hate1.shape)
+        sys.exit(0)
 
         for rk in range(4):
             # ----------------------------------------------------------
@@ -331,7 +333,6 @@ class spectralLES(object):
             irfft3(self.comm, self.U_hat[0], self.U[0])
             irfft3(self.comm, self.U_hat[1], self.U[1])
             irfft3(self.comm, self.U_hat[2], self.U[2])
-
             # ----------------------------------------------------------
             # compute all RHS terms
             self.computeAD(**kwargs)
