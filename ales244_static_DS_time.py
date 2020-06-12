@@ -1057,8 +1057,8 @@ def ales244_static_les_test(pp=None, sp=None):
     # -------------------------------------------------------------------------
     # Run the simulation
     #while t_sim < pp.tlimit:
-    path_name = 'data-4'
-    while t_sim < pp.tlimit+1.e-10 and tstep < 300:
+    path_name = 'data-0'
+    while t_sim < pp.tlimit+1.e-10 and tstep < 10:
         # -- Update the dynamic dt based on CFL constraint
         dt = solver.new_dt_constant_nu(pp.cfl)
         t_test = t_sim + 0.5*dt
@@ -1089,29 +1089,29 @@ def ales244_static_les_test(pp=None, sp=None):
             #-------------------------------------------------------------#
             # Storing the time data                                       #
             #-------------------------------------------------------------#
-            np.save(path_name + '/time/SimulationTime_%(a)3.3d' % {'a': ispec}, t_sim)
-            #------------------------------------------------------------------#
-            # Storing the enstrophy transport terms (spectral)                 #
-            #------------------------------------------------------------------#
-            np.save(path_name + '/A-enst/A_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank},   A_enst)
-            np.save(path_name + '/B-enst/B_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank},   B_enst)
-            np.save(path_name + '/D-enst/D_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank},   D_enst)
-            np.save(path_name + '/Pi-enst/Pi_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, Pi_enst)
-            np.save(path_name + '/P-enst/P_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank},   P_enst)
-            #------------------------------------------------------------------#
-            # Storing the kinetic energy transport terms                       #
-            #------------------------------------------------------------------#
-            np.save(path_name + '/A-ke/A_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, A_ke)
-            np.save(path_name + '/B-ke/B_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, B_ke)
-            np.save(path_name + '/C-ke/C_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, C_ke)
-            np.save(path_name + '/D-ke/D_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, D_ke)
-            np.save(path_name + '/P-ke/P_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, P_ke)
-            #------------------------------------------------------------------#
-            # Storing the velocity data                                        #
-            #------------------------------------------------------------------#
-            np.save(path_name + '/velocity1/Velocity1_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, U[2])
-            np.save(path_name + '/velocity2/Velocity2_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, U[1])
-            np.save(path_name + '/velocity3/Velocity3_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, U[0])
+            #np.save(path_name + '/time/SimulationTime_%(a)3.3d' % {'a': ispec}, t_sim)
+            ##------------------------------------------------------------------#
+            ## Storing the enstrophy transport terms (spectral)                 #
+            ##------------------------------------------------------------------#
+            #np.save(path_name + '/A-enst/A_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank},   A_enst)
+            #np.save(path_name + '/B-enst/B_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank},   B_enst)
+            #np.save(path_name + '/D-enst/D_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank},   D_enst)
+            #np.save(path_name + '/Pi-enst/Pi_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, Pi_enst)
+            #np.save(path_name + '/P-enst/P_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank},   P_enst)
+            ##------------------------------------------------------------------#
+            ## Storing the kinetic energy transport terms                       #
+            ##------------------------------------------------------------------#
+            #np.save(path_name + '/A-ke/A_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, A_ke)
+            #np.save(path_name + '/B-ke/B_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, B_ke)
+            #np.save(path_name + '/C-ke/C_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, C_ke)
+            #np.save(path_name + '/D-ke/D_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, D_ke)
+            #np.save(path_name + '/P-ke/P_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, P_ke)
+            ##------------------------------------------------------------------#
+            ## Storing the velocity data                                        #
+            ##------------------------------------------------------------------#
+            #np.save(path_name + '/velocity1/Velocity1_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, U[2])
+            #np.save(path_name + '/velocity2/Velocity2_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, U[1])
+            #np.save(path_name + '/velocity3/Velocity3_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, U[0])
             #------------------------------------------------------------------#
             # Storing the pressure data                                        #
             #------------------------------------------------------------------#
@@ -1119,8 +1119,8 @@ def ales244_static_les_test(pp=None, sp=None):
             #------------------------------------------------------------------#
             # Storing the kinetic energy and enstrophy                         #
             #------------------------------------------------------------------#
-            np.save(path_name + '/ke/ke_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, ke)
-            np.save(path_name + '/enst/enstrophy_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, enst)
+            #np.save(path_name + '/ke/ke_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, ke)
+            #np.save(path_name + '/enst/enstrophy_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, enst)
             ##------------------------------------------------------------------#
             ## Storing the subgrid stress data                                  #
             ##------------------------------------------------------------------#
@@ -1142,9 +1142,9 @@ def ales244_static_les_test(pp=None, sp=None):
             #------------------------------------------------------------------#
             # Storing the vorticity data                                       #
             #------------------------------------------------------------------#
-            np.save(path_name + '/omega1/Omega1_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, omega[2])
-            np.save(path_name + '/omega2/Omega2_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, omega[1])
-            np.save(path_name + '/omega3/Omega3_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, omega[0])
+            #np.save(path_name + '/omega1/Omega1_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, omega[2])
+            #np.save(path_name + '/omega2/Omega2_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, omega[1])
+            #np.save(path_name + '/omega3/Omega3_%(a)3.3d_%(b)3.3d' % {'a': ispec, 'b': comm.rank}, omega[0])
             #------------------------------------------------------------------#
             # Storing Cs2 data                                                 #
             #------------------------------------------------------------------#

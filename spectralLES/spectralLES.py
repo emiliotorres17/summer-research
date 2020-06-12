@@ -335,6 +335,7 @@ class spectralLES(object):
             self.computeAD(**kwargs)
             for computeSource in Sources:
                 computeSource(**kwargs)
+                print('here here here')
 
             # ----------------------------------------------------------
             # dealias and project the entire RHS
