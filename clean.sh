@@ -1,0 +1,13 @@
+rm -ivfr time/*.npy
+rm -ivfr A-enst/*.npy
+rm -ivfr B-enst/*.npy
+rm -ivfr D-enst/*.npy
+rm -ivfr Pi-enst/*.npy
+rm -ivfr P-enst/*.npy
+rm -ivfr enst/*.npy
+rm -ivfr A-ke/*.npy
+rm -ivfr B-ke/*.npy
+rm -ivfr D-ke/*.npy
+rm -ivfr C-ke/*.npy
+rm -ivfr P-ke/*.npy
+rm -ivfr ke/*.npy
