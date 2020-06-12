@@ -334,8 +334,7 @@ class spectralLES(object):
             # ----------------------------------------------------------
             # compute all RHS terms
             self.computeAD(**kwargs)
-            print(self.computeAD(**kwargs))
-            sys.exit(0)
+            print(**kwargs)
             #print(Sources)
             for computeSource in Sources:
                 computeSource(**kwargs)
