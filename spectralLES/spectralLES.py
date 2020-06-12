@@ -54,6 +54,7 @@ https://github.com/teslacu/spectralLES.git
 
 """
 
+import sys
 from mpi4py import MPI
 import numpy as np
 from math import sqrt, pi
@@ -337,8 +338,8 @@ class spectralLES(object):
             for computeSource in Sources:
                 computeSource(**kwargs)
                 print(computeSource(**kwargs))
+                sys.exit(0)
 
-            #sys.exit(0)
             # ----------------------------------------------------------
             # dealias and project the entire RHS
             self.dU *= self.dealias
