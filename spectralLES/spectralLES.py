@@ -337,7 +337,7 @@ class spectralLES(object):
             for computeSource in Sources:
                 print(computeSource)
                 computeSource(**kwargs)
-            sys.exit(0)
+            #sys.exit(0)
             # ----------------------------------------------------------
             # dealias and project the entire RHS
             self.dU *= self.dealias
