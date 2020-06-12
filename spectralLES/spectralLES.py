@@ -333,10 +333,11 @@ class spectralLES(object):
             # ----------------------------------------------------------
             # compute all RHS terms
             self.computeAD(**kwargs)
-            print(Sources)
+            #print(Sources)
             for computeSource in Sources:
-                print(computeSource)
                 computeSource(**kwargs)
+                print(computeSource(**kwargs))
+
             #sys.exit(0)
             # ----------------------------------------------------------
             # dealias and project the entire RHS
