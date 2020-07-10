@@ -95,10 +95,10 @@ if __name__ == '__main__':
         #-----------------------------------------------------------------#
         # Initial condition                                               #
         #-----------------------------------------------------------------#
-        x0      = 0.0
-        y1_0    = 1.0
-        y2_0    = 1.0
-        y3_0    = 1.0
+        x0      = 1.0000000000000
+        y1_0    = 0.3678794411199
+        y2_0    = 0.1353352832401
+        y3_0    = 0.0497870684156
         #-----------------------------------------------------------------#
         # Preallocating solution vectors                                  #
         #-----------------------------------------------------------------#
@@ -116,7 +116,7 @@ if __name__ == '__main__':
         #-----------------------------------------------------------------#
         # Solution variables                                              #
         #-----------------------------------------------------------------#
-        xexact  = linspace(0.0, 1.0, N+1)
+        xexact  = linspace(1.0, 0.0, N+1)
         print(xexact)
         y1_sol  = exp(-xexact)
         print(y1_sol)
@@ -141,9 +141,9 @@ if __name__ == '__main__':
             #-------------------------------------------------------------#
             # Finding k2,n                                                #
             #-------------------------------------------------------------#
-            k2_1    = func1(y1_0 + 0.5*dx*k1_1, y2_0 + 0.5*dx*k1_2, y3_0 + 0.5*dx*k1_3, 0.5*dx+x0)
-            k2_2    = func2(y1_0 + 0.5*dx*k1_1, y2_0 + 0.5*dx*k1_2, y3_0 + 0.5*dx*k1_3, 0.5*dx+x0)
-            k2_3    = func3(y1_0 + 0.5*dx*k1_1, y2_0 + 0.5*dx*k1_2, y3_0 + 0.5*dx*k1_3, 0.5*dx+x0)
+            k2_1    = func1(y1_0 - 0.5*dx*k1_1, y2_0 - 0.5*dx*k1_2, y3_0 - 0.5*dx*k1_3, x0 - 0.5*dx)
+            k2_2    = func2(y1_0 - 0.5*dx*k1_1, y2_0 - 0.5*dx*k1_2, y3_0 - 0.5*dx*k1_3, x0 - 0.5*dx)
+            k2_3    = func3(y1_0 - 0.5*dx*k1_1, y2_0 - 0.5*dx*k1_2, y3_0 - 0.5*dx*k1_3, x0 - 0.5*dx)
             print('k2_1 = %.6f'         %(k2_1))
             print('k2_2 = %.6f'         %(k2_2))
             print('k2_3 = %.6f'         %(k2_3))
@@ -151,9 +151,9 @@ if __name__ == '__main__':
             #-------------------------------------------------------------#
             # Finding k3,n                                                #
             #-------------------------------------------------------------#
-            k3_1    = func1(y1_0 + 0.5*dx*k2_1, y2_0 + 0.5*dx*k2_2, y3_0 + 0.5*dx*k2_3, 0.5*dx+x0)
-            k3_2    = func2(y1_0 + 0.5*dx*k2_1, y2_0 + 0.5*dx*k2_2, y3_0 + 0.5*dx*k2_3, 0.5*dx+x0)
-            k3_3    = func3(y1_0 + 0.5*dx*k2_1, y2_0 + 0.5*dx*k2_2, y3_0 + 0.5*dx*k2_3, 0.5*dx+x0)
+            k3_1    = func1(y1_0 - 0.5*dx*k2_1, y2_0 - 0.5*dx*k2_2, y3_0 - 0.5*dx*k2_3, x0 - 0.5*dx)
+            k3_2    = func2(y1_0 - 0.5*dx*k2_1, y2_0 - 0.5*dx*k2_2, y3_0 - 0.5*dx*k2_3, x0 - 0.5*dx)
+            k3_3    = func3(y1_0 - 0.5*dx*k2_1, y2_0 - 0.5*dx*k2_2, y3_0 - 0.5*dx*k2_3, x0 - 0.5*dx)
             print('k3_1 = %.6f'         %(k3_1))
             print('k3_2 = %.6f'         %(k3_2))
             print('k3_3 = %.6f'         %(k3_3))
@@ -161,9 +161,9 @@ if __name__ == '__main__':
             #-------------------------------------------------------------#
             # Finding k4,n                                                #
             #-------------------------------------------------------------#
-            k4_1    = func1(y1_0 + dx*k3_1, y2_0 + dx*k3_2, y3_0 + dx*k3_3, dx+x0)
-            k4_2    = func2(y1_0 + dx*k3_1, y2_0 + dx*k3_2, y3_0 + dx*k3_3, dx+x0)
-            k4_3    = func3(y1_0 + dx*k3_1, y2_0 + dx*k3_2, y3_0 + dx*k3_3, dx+x0)
+            k4_1    = func1(y1_0 - dx*k3_1, y2_0 - dx*k3_2, y3_0 - dx*k3_3, x0-dx)
+            k4_2    = func2(y1_0 - dx*k3_1, y2_0 - dx*k3_2, y3_0 - dx*k3_3, x0-dx)
+            k4_3    = func3(y1_0 - dx*k3_1, y2_0 - dx*k3_2, y3_0 - dx*k3_3, x0-dx)
             print('k4_1 = %.6f'         %(k4_1))
             print('k4_2 = %.6f'         %(k4_2))
             print('k4_3 = %.6f'         %(k4_3))
@@ -171,13 +171,13 @@ if __name__ == '__main__':
             #-------------------------------------------------------------#
             # Finding k4,n                                                #
             #-------------------------------------------------------------#
-            y1      = y1_0 + (dx/6.0)*(k1_1 + 2.0*k2_1 + 2.0*k3_1 + k4_1)
-            y2      = y2_0 + (dx/6.0)*(k1_2 + 2.0*k2_2 + 2.0*k3_2 + k4_2)
-            y3      = y3_0 + (dx/6.0)*(k1_3 + 2.0*k2_3 + 2.0*k3_3 + k4_3)
+            y1      = y1_0 - (dx/6.0)*(k1_1 + 2.0*k2_1 + 2.0*k3_1 + k4_1)
+            y2      = y2_0 - (dx/6.0)*(k1_2 + 2.0*k2_2 + 2.0*k3_2 + k4_2)
+            y3      = y3_0 - (dx/6.0)*(k1_3 + 2.0*k2_3 + 2.0*k3_3 + k4_3)
             #-------------------------------------------------------------#
             # Updating the y values                                       #
             #-------------------------------------------------------------#
-            x0      += dx
+            x0      -= dx
             y1_0    = y1
             y2_0    = y2
             y3_0    = y3
@@ -199,9 +199,9 @@ if __name__ == '__main__':
     #---------------------------------------------------------------------#
     #  Write solutions values                                             #
     #---------------------------------------------------------------------#
-    f   = open(media_path + 'solutions.dat', 'w')
+    f   = open(media_path + 'back-tracking-solutions.dat', 'w')
     out = ''
-    for i in range(0, len(y1_vec)):
+    for i in range(len(y1_vec)-1, -1,-1):
         out += '%25.13f\t%25.13f\t%25.13f\t%25.13f\n'\
                         %(x[i], y1_vec[i], y2_vec[i], y3_vec[i])  
     f.write(out)
@@ -225,37 +225,37 @@ if __name__ == '__main__':
     # Solution 1                                                          #
     #---------------------------------------------------------------------#
     plt.plot(x, y1_vec, 'r*', label='RK4')
-    plt.plot(x, y1_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(xexact, y1_sol, 'k--', lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
-    plt.savefig(media_path + 'y1-solution.png')
+    plt.savefig(media_path + 'y1-back-tracking.png')
     plt.clf()
     #---------------------------------------------------------------------#
     # Solution 2                                                          #
     #---------------------------------------------------------------------#
-    plt.plot(x, y2_vec, 'ro', label='RK4')
-    plt.plot(x, y2_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(x, y2_vec, 'r*', label='RK4')
+    plt.plot(xexact, y2_sol, 'k--', lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
-    plt.savefig(media_path + 'y2-solution.png')
+    plt.savefig(media_path + 'y2-back-tracking.png')
     plt.clf()
     #---------------------------------------------------------------------#
     # Solution 3                                                          #
     #---------------------------------------------------------------------#
-    plt.plot(x, y3_vec, 'ro', label='RK4')
-    plt.plot(x, y3_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(x, y3_vec, 'r*', label='RK4')
+    plt.plot(xexact, y3_sol, 'k--', lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
-    plt.savefig(media_path + 'y3-solution.png')
+    plt.savefig(media_path + 'y3-back-tracking.png')
     plt.clf()
     #---------------------------------------------------------------------#
     # Error plot                                                          #
     #---------------------------------------------------------------------#
-    plt.loglog(dx_vec, err1, 'r', lw=1.5, label='$y_{1}$')
-    plt.loglog(dx_vec, err2, 'b', lw=1.5, label='$y_{2}$')
-    plt.loglog(dx_vec, err3, 'k', lw=1.5, label='$y_{3}$')
+    plt.loglog(dx_vec, err1, 'ro-', lw=1.5, label='$y_{1}$')
+    plt.loglog(dx_vec, err2, 'bo-', lw=1.5, label='$y_{2}$')
+    plt.loglog(dx_vec, err3, 'ko-', lw=1.5, label='$y_{3}$')
     plt.loglog(dx_vec, 0.1*dx_vec**4.0 , 'g', lw=1.5, label="$\sim c_{1} x^{4}$")
     plt.grid(True)
     plt.legend(loc=0)
-    plt.savefig(media_path + 'error-plot.png')
+    plt.savefig(media_path + 'error-back-tracking.png')
     plt.clf()
