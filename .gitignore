@@ -1,0 +1,13 @@
+tags
+*.toc
+*.out
+*.xwm
+*.log
+*.pdf
+*.aux
+*.lof
+*.lot
+*.swp
+*.swo
+*.swq
+*.sw*
