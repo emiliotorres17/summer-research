@@ -115,3 +115,4 @@ if rank == 0:
     #assert round(k-0.124953117517, 7) == 0
     assert round(k-0.124953117517, 7) < 0
     
+plt.plot(
