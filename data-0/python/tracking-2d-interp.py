@@ -37,26 +37,32 @@ def ghost_cells(
     #---------------------------------------------------------------------#
     # Adding in the ghost cells (left boundary)                           #
     #---------------------------------------------------------------------#
-    for k in range(0, 64):
-        for j in range(0, 64):
-            field[0,j+1,k+1]    = 0.5*(uF[0,j,k] + uF[-1,j,k])
-            field[-1,j+1,k+1]   = 0.5*(uF[0,j,k] + uF[-1,j,k])
+    field[1:65, 1:65, 1:65] = uF[:,:,:]
+    field[0,:,:]    = 0.5*(field[1,:,:] + field[-2,:,:])
+    field[-1,:,:]   = 0.5*(field[1,:,:] + field[-2,:,:])
+    field[:,0,:]    = 0.5*(field[:,1,:] + field[:,-2,:])
+    field[:,-1,:]   = 0.5*(field[:,1,:] + field[:,-2,:])
+    field[:,:,0]    = 0.5*(field[:,:,1] + field[:,:,-2])
+    field[:,:,-1]   = 0.5*(field[:,:,1] + field[:,:,-2])
 
-    for k in range(0, 64):
-        for i in range(0, 64):
-            field[i+1,0,k+1] = 0.5*(uF[i,0,k] + uF[i,-1,k])
-            field[i+1,-1,k+1] = 0.5*(uF[i,0,k] + uF[i,-1,k])
+    dx      = 2.*pi/float(64)
+    x       = linspace(-0.5*dx, 2*pi + 0.5*dx, 66)
+    [X, Y]  = meshgrid(x,x)
 
-    for j in range(0, 64):
-        for i in range(0, 64):
-            field[i+1,j+1,0] = 0.5*(uF[i,j,0] + uF[i,j,0])
-            field[i+1,j+1,-1] = 0.5*(uF[i,j,0] + uF[i,j,-1])
+    cnt     = plt.contourf(X, Y, field[:,32,:, 123], arange(-2, 2, 4/500),\
+                cmap='jet', extend='both')
+    
+    for c in cnt.collections:
+        c.set_edgecolor('face')
+    plt.colorbar()
+    plt.show()
+
 
 
     test    = ''
-    for j in range(0,66):
+    for k in range(0,66):
         for i in range(0,66):
-            test += '%35.18E'           %(field[i,j, 0, 0])
+            test += '%35.18E'           %(field[i,3, k, 0])
         test += '\n'
     f   = open('test.dat', 'w')
     f.write(test)
