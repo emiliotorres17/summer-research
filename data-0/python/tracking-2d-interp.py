@@ -37,17 +37,23 @@ def ghost_cells(
     #---------------------------------------------------------------------#
     # Adding in the ghost cells (left boundary)                           #
     #---------------------------------------------------------------------#
-    for k in range(0,64):
+    for k in range(0, 64):
         for j in range(0, 64):
-            field[0, j, k]  = 0.5*(uF[0,j,k] + uF[-1, j, k]) 
-            field[-1, j, k] = 0.5*(uF[0,j,k] + uF[-1, j, k])
+            field[0,j+1,k+1]    = 0.5*(uF[0,j,k] + uF[-1,j,k])
+            field[-1,j+1,k+1]   = 0.5*(uF[0,j,k] + uF[-1,j,k])
+
     for k in range(0, 64):
         for i in range(0, 64):
-            field[i, 0, k]  = 0.5*(uF[i,0,k] + uF[i, -1, k])
-            field[i, -1, k] = 0.5*(uF[i,0,k] + uF[i, -1, k])
-    field[1:65, 1:65, 1:65, :] =  uF[:,:,:,:]
-    test    = ''
+            field[i+1,0,k+1] = 0.5*(uF[i,0,k] + uF[i,-1,k])
+            field[i+1,-1,k+1] = 0.5*(uF[i,0,k] + uF[i,-1,k])
 
+    for j in range(0, 64):
+        for i in range(0, 64):
+            field[i+1,j+1,0] = 0.5*(uF[i,j,0] + uF[i,j,0])
+            field[i+1,j+1,-1] = 0.5*(uF[i,j,0] + uF[i,j,-1])
+
+
+    test    = ''
     for j in range(0,66):
         for i in range(0,66):
             test += '%35.18E'           %(field[i,j, 0, 0])
