@@ -1,0 +1,15 @@
+tags
+*.toc
+*.out
+*.xwm
+*.log
+*.pdf
+*.aux
+*.lof
+*.lot
+*.swp
+*.swo
+*.swq
+*.sw*
+*.png
+rk4-study/temp.txt
