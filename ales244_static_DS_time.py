@@ -1217,7 +1217,7 @@ def ales244_static_les_test(pp=None, sp=None):
     KE      = 0.5*comm.allreduce(psum(np.square(U)))/solver.Nx
     Omega   = 0.5*comm.allreduce(psum(np.square(omega)))/solver.Nx
     tseries.append([tstep, t_sim, KE, Omega])
-
+    
     if comm.rank == 0:
         #fname = '%s/%s-%3.3d_KE_tseries.txt' % (pp.adir, pp.pid, ispec)
         fname   = path_name + '/ke-omega-avg.txt' 

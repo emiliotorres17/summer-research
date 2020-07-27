@@ -84,7 +84,7 @@ if __name__ == '__main__':
     #---------------------------------------------------------------------#
     # Domain variables                                                    #
     #---------------------------------------------------------------------#
-    um     = [2, 4, 8, 16, 32, 64, 128, 256]
+    um      = [2, 4, 8, 16, 32, 64, 128, 256]
     num     = [2, 4, 8, 16,32, 64, 128, 256, 512, 2048, 4096]
     err1    = zeros(len(num))
     err2    = zeros(len(num))
@@ -204,7 +204,7 @@ if __name__ == '__main__':
     f   = open(media_path + 'solutions.dat', 'w')
     out = ''
     for i in range(0, len(y1_vec)):
-        out += '%25.13f\t%25.13f\t%25.13f\t%25.13f\n'\
+        out += '%30.18f\t%30.18f\t%30.18f\t%30.18f\n'\
                         %(x[i], y1_vec[i], y2_vec[i], y3_vec[i])
     f.write(out)
     f.close()
@@ -227,7 +227,7 @@ if __name__ == '__main__':
     # Solution 1                                                          #
     #---------------------------------------------------------------------#
     plt.plot(x, y1_vec, 'r*', label='RK4')
-    plt.plot(x, y1_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(x, y1_sol, 'k<--', markevery=400, lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
     plt.savefig(media_path + 'y1-solution.png')
@@ -235,8 +235,8 @@ if __name__ == '__main__':
     #---------------------------------------------------------------------#
     # Solution 2                                                          #
     #---------------------------------------------------------------------#
-    plt.plot(x, y2_vec, 'ro', label='RK4')
-    plt.plot(x, y2_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(x, y2_vec, 'r*', label='RK4')
+    plt.plot(x, y2_sol, 'k<--', markevery=400, lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
     plt.savefig(media_path + 'y2-solution.png')
@@ -244,8 +244,8 @@ if __name__ == '__main__':
     #---------------------------------------------------------------------#
     # Solution 3                                                          #
     #---------------------------------------------------------------------#
-    plt.plot(x, y3_vec, 'ro', label='RK4')
-    plt.plot(x, y3_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(x, y3_vec, 'r*', label='RK4')
+    plt.plot(x, y3_sol, 'k<--', markevery=400, lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
     plt.savefig(media_path + 'y3-solution.png')
@@ -253,9 +253,9 @@ if __name__ == '__main__':
     #---------------------------------------------------------------------#
     # Error plot                                                          #
     #---------------------------------------------------------------------#
-    plt.loglog(dx_vec, err1, 'r', lw=1.5, label='$y_{1}$')
-    plt.loglog(dx_vec, err2, 'b', lw=1.5, label='$y_{2}$')
-    plt.loglog(dx_vec, err3, 'k', lw=1.5, label='$y_{3}$')
+    plt.loglog(dx_vec, err1, 'ro-', lw=1.5, label='$y_{1}$')
+    plt.loglog(dx_vec, err2, 'bo-', lw=1.5, label='$y_{2}$')
+    plt.loglog(dx_vec, err3, 'ko-', lw=1.5, label='$y_{3}$')
     plt.loglog(dx_vec, 0.1*dx_vec**4.0 , 'g', lw=1.5, label="$\sim c_{1} x^{4}$")
     plt.grid(True)
     plt.legend(loc=0)

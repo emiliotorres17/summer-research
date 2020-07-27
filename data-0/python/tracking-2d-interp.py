@@ -32,7 +32,7 @@ from tracking import location_adjustment
 def ghost_cells(
         uF):
 
-    """ Adding in ghost cells for 0 and 2*pi """
+    """ Adding in ghost cells for -dx/2 and 2*pi + dx/2 """
     #---------------------------------------------------------------------#
     # Preallocating space                                                 #
     #---------------------------------------------------------------------#
@@ -41,46 +41,50 @@ def ghost_cells(
     #---------------------------------------------------------------------#
     # Interior points                                                     #
     #---------------------------------------------------------------------#
-    field[1:65, 1:65, 1:65] = uF[:,:,:]
+    for k in range(0,64):
+        for j in range(0,64):
+            for i in range(0,64):
+                field[i+1,j+1,k+1]    = uF[i, j, k]
     #---------------------------------------------------------------------#
-    # x1 direction                                                        #
-    #---------------------------------------------------------------------#
-    field[0,1:65,1:65]      = 0.5*(field[1,1:65,1:65] + field[-2,1:65,1:65])
-    field[-1,1:65,1:65]     = 0.5*(field[1,1:65,1:65] + field[-2,1:65,1:65])
-    #---------------------------------------------------------------------#
-    # x2 direction                                                        #
-    #---------------------------------------------------------------------#
-    field[1:65,0,1:65]      = 0.5*(field[1:65,1,1:65] + field[1:65,-2,1:65])
-    field[1:65,-1,1:65]     = 0.5*(field[1:65,1,1:65] + field[1:65,-2,1:65])
-    #---------------------------------------------------------------------#
-    # x3 direction                                                        #
-    #---------------------------------------------------------------------#
-    field[1:65,1:65,0]      = 0.5*(field[1:65,1:65,1] + field[1:65,1:65,-2])
-    field[1:65,1:65,-1]     = 0.5*(field[1:65,1:65,1] + field[1:65,1:65,-2])
-    #---------------------------------------------------------------------#
-    # Corner points in the x1-x2 plane                                    #
+    # x1 direction points                                                 #
     #---------------------------------------------------------------------#
     for k in range(0, 66):
-        field[0,0,k]    = 0.5*(field[1,0,k]   + field[0,1,k])
-        field[0,65,k]   = 0.5*(field[1,65,k]  + field[0,64,k])
-        field[65,65,k]  = 0.5*(field[64,65,k] + field[65,64,k])
-        field[65,0,k]   = 0.5*(field[64,0,k]  + field[65,1,k])
+        for j in range(0, 66):
+            field[0,j,k]    = field[64,j,k]
+            field[65,j,k]   = field[1,j,k]
     #---------------------------------------------------------------------#
-    # Corner points in the x1-x3 plane                                    #
+    # x2 direction points                                                 #
+    #---------------------------------------------------------------------#
+    for k in range(0, 66):
+        for i in range(0, 66):
+            field[i,0,k]    = field[i,64,k]
+            field[i,65,k]   = field[i,1,k]
+    #---------------------------------------------------------------------#
+    # x3 direction points                                                 #
     #---------------------------------------------------------------------#
     for j in range(0, 66):
-        field[0,j,0]    = 0.5*(field[0,j,1]   + field[1,j,0])
-        field[0,j,65]   = 0.5*(field[1,j,65]  + field[0,j,64])
-        field[65,j,65]  = 0.5*(field[64,j,65] + field[65,j,64])
-        field[65,j,0]   = 0.5*(field[64,j,0]  + field[65,k,1])
-    #---------------------------------------------------------------------#
-    # Corner points in the x2-x3 plane                                    #
-    #---------------------------------------------------------------------#
-    for i in range(0, 66):
-        field[i,0,0]    = 0.5*(field[i,0,1]   + field[i,1,0])
-        field[i,0,65]   = 0.5*(field[i,1,65]  + field[i,0,64])
-        field[i,65,65]  = 0.5*(field[i,64,65] + field[i,65,64])
-        field[i,65,0]   = 0.5*(field[i,64,0]  + field[i,65,1])
+        for i in range(0, 66):
+            field[i,j,0]    = field[i,j,64]
+            field[i,j,65]   = field[i,j,1]
+
+
+    test    = ''
+    for k in range(0,66):
+        for i in range(0,66):
+            test += '%25.16E'               %(field[i,13,k, 123])
+        test += '\n'
+    f   = open('test.dat', 'w')
+    f.write(test)
+    f.close()
+
+    test2 = ''
+    for k in range(0,64):
+        for i in range(0,64):
+            test2 += '%25.16E'               %(uF[i,12,k, 123])
+        test2 += '\n'
+    f   = open('test2.dat', 'w')
+    f.write(test2)
+    f.close()
 
     return field
 #-------------------------------------------------------------------------#
@@ -138,6 +142,7 @@ if __name__ == '__main__':
     print('Loading data:')
     u1      = load(data_path + 'velocity1.npy')
     u1      = ghost_cells(u1)
+    sys.exit(8)
     print('\tvelocity-1')
     u2      = load(data_path + 'velocity2.npy')
     u2      = ghost_cells(u2)

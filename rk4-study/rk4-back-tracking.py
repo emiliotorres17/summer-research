@@ -97,9 +97,9 @@ if __name__ == '__main__':
         # Initial condition                                               #
         #-----------------------------------------------------------------#
         x0      = 1.0000000000000
-        y1_0    = 0.3678794411199
-        y2_0    = 0.1353352832401
-        y3_0    = 0.0497870684156
+        y1_0    = 0.367879441171441057
+        y2_0    = 0.135335283236613119
+        y3_0    = 0.049787068367864860 
         #-----------------------------------------------------------------#
         # Preallocating solution vectors                                  #
         #-----------------------------------------------------------------#
@@ -226,7 +226,7 @@ if __name__ == '__main__':
     # Solution 1                                                          #
     #---------------------------------------------------------------------#
     plt.plot(x, y1_vec, 'r*', label='RK4')
-    plt.plot(xexact, y1_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(xexact, y1_sol, 'k--<', markevery=400, lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
     plt.savefig(media_path + 'y1-back-tracking.png')
@@ -235,7 +235,7 @@ if __name__ == '__main__':
     # Solution 2                                                          #
     #---------------------------------------------------------------------#
     plt.plot(x, y2_vec, 'r*', label='RK4')
-    plt.plot(xexact, y2_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(xexact, y2_sol, 'k--<', markevery=400, lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
     plt.savefig(media_path + 'y2-back-tracking.png')
@@ -244,7 +244,7 @@ if __name__ == '__main__':
     # Solution 3                                                          #
     #---------------------------------------------------------------------#
     plt.plot(x, y3_vec, 'r*', label='RK4')
-    plt.plot(xexact, y3_sol, 'k--', lw=1.75, label='Exact')
+    plt.plot(xexact, y3_sol, 'k--<', markevery=400, lw=1.75, label='Exact')
     plt.grid(True)
     plt.legend(loc=0)
     plt.savefig(media_path + 'y3-back-tracking.png')
